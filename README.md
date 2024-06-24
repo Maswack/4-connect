@@ -42,7 +42,7 @@
 
 ### Initial dump:
   - Added data managment for games and users
-  - Added creating of account
+  - Added creation of account
   - Added possibility of setting your skins
   - Added /play commands that allows you to make a move
   - Added possibility of challenging someone to a duel
