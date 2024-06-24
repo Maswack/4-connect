@@ -56,22 +56,8 @@
 </br>
 </br>
 
-<<<<<<< Updated upstream
-## ⚒️ Versions:
 
-### Initial dump:
-  - Added data managment for games and users
-  - Added creation of account
-  - Added possibility of setting your skins
-  - Added /play commands that allows you to make a move
-  - Added possibility of challenging someone to a duel
-  - Added nicely looking win panel (annoucing who won)
-  - Added possibility of playing the actual game
-  - Repaired problems with applying skins
-  - Repaired problem with inaccurate display
-=======
 ## ⚒️ Curent-Version:
->>>>>>> Stashed changes
 
 ### 0.9.0 (24.06.2024):
   - Added info page for checking your and other players stats
