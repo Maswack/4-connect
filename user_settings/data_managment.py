@@ -42,7 +42,6 @@ class DataManager():
         self.user_data = {
             "id": id,
             "elo": 1000,
-            "games": 0,
             "w": 0,
             "l": 0,
             "player_skin": "🟨",
@@ -100,9 +99,8 @@ class DataManager():
 
 
     #Updates Elo after game
-    def update_aftergame(self, elo_diff, result):
-        self.user_data["elo"] += elo_diff
-        self.user_data["games"] += 1
+    def update_aftergame(self, elo_gain, result):
+        self.user_data["elo"] += elo_gain
         self.user_data[result] += 1
 
         self.save_user_data()

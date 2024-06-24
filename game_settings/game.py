@@ -131,9 +131,46 @@ class Game():
 
     async def remove_last_pos_msg(self, channel):
         msg = await channel.fetch_message(self.game["last_msg"])
-        await msg.delete()
+
+        if msg:
+            await msg.delete()
 
 
-    def end_game(self):
+    # Elo calculation method
+    def calculate_elo(self, winner_elo, loser_elo):
+        K_factor = 40
+
+        # Calculates expected result of player A
+        def expected_score(A, B):
+            return 1 / (pow(10, ((B-A) / 400)) + 1)
+        
+
+        # Calculate expected scorer
+        expected_winner_score = expected_score(winner_elo, loser_elo)
+        expected_loser_score = expected_score(loser_elo, winner_elo)
+        
+        # Calculate elo_diff
+        winner_elo_diff = K_factor * (1 - expected_winner_score)
+        loser_elo_diff = K_factor * (0 - expected_loser_score)
+
+
+        return winner_elo_diff, loser_elo_diff
+
+
+
+    def end_game(self, loser_id, winner_id):
+        winner = PlayerData(winner_id, "update")
+        loser = PlayerData(loser_id, "update")
+
+        winner_elo = winner.manager.user_data["elo"]
+        loser_elo = loser.manager.user_data["elo"]
+
+
+        winner_elo_diff, loser_elo_diif = self.calculate_elo(winner_elo, loser_elo)
+
+        winner.update_stats(round(winner_elo_diff), "w")
+        loser.update_stats(round(loser_elo_diif), "l")
+
+
         os.remove(self.path)
 
