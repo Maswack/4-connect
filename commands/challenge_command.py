@@ -54,7 +54,7 @@ class ChallengeCommand(commands.Cog):
         #    return
 
 
-        game_setup = SetupGame(p_id=player_id, e_id=enemy_id, channel=channel_id)
+        game_setup = SetupGame(p_id=player_id, e_id=enemy_id, channel=channel_id, mode=mode)
         if game_setup.game_exits():
             await ctx.reply("Game is already played on this channel", ephemeral=True, delete_after=5)
             return
@@ -63,7 +63,7 @@ class ChallengeCommand(commands.Cog):
         #Send a challenge to oponent
         view = challengeView(ctx.guild.id , ctx.channel.id, ctx.author)
 
-        await enemy_member.send(content=f"{ctx.author.name.capitalize()} send you a 4-connect challenge", view=view)
+        await enemy_member.send(content=f"{ctx.author.name.capitalize()} send you a 4-connect challenge [{mode}]", view=view)
         await ctx.reply("...", ephemeral=True, delete_after=5)
         await view.wait()
 

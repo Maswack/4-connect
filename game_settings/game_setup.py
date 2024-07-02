@@ -2,11 +2,12 @@ import json
 import os
 
 class SetupGame():
-    def __init__(self, p_id, e_id, channel):
+    def __init__(self, p_id, e_id, channel, mode):
         self.data = {
             "p_id": p_id,
             "e_id": e_id,
             "channel": channel,
+            "game_mode": mode,
             "last_msg": "",
             "n_move": 0,
             "pos": [["." for x in range(6)] for y in range(7)] 

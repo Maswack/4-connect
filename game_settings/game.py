@@ -159,17 +159,25 @@ class Game():
 
 
     def end_game(self, loser_id, winner_id):
-        winner = PlayerData(winner_id, "update")
-        loser = PlayerData(loser_id, "update")
 
-        winner_elo = winner.manager.user_data["elo"]
-        loser_elo = loser.manager.user_data["elo"]
+        # check if it was competetive:
+        # if so apply the stats change
+        if self.game["game_mode"] == "competetive":
 
+            # Get the winner and loser playerData
+            winner = PlayerData(winner_id, "update")
+            loser = PlayerData(loser_id, "update")
 
-        winner_elo_diff, loser_elo_diif = self.calculate_elo(winner_elo, loser_elo)
+            # Get the current elo of players
+            winner_elo = winner.manager.user_data["elo"]
+            loser_elo = loser.manager.user_data["elo"]
 
-        winner.update_stats(round(winner_elo_diff), "w")
-        loser.update_stats(round(loser_elo_diif), "l")
+            # Calculate elo diff of players after game
+            winner_elo_diff, loser_elo_diif = self.calculate_elo(winner_elo, loser_elo)
+
+            # Update Players data/stats
+            winner.update_stats(round(winner_elo_diff), "w")
+            loser.update_stats(round(loser_elo_diif), "l")
 
 
         os.remove(self.path)
