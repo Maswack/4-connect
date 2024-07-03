@@ -4,6 +4,7 @@ from discord.ext import commands
 # For options in [mode] parameter
 from typing import Literal
 
+from events.in_bot.on_challenge import on_challenge_event
 
 from user_settings.data_managment import PlayerData
 
@@ -26,6 +27,10 @@ class ChallengeCommand(commands.Cog):
         description="challenge someone to a game of 4-connect",
     )
     async def challenge(self, ctx, enemy_member: discord.Member, mode: Literal["casual", "competetive"]):
+        # Make event on challenge (not related to challenge procces):
+        await on_challenge_event(ctx.author)
+
+
         player_id = ctx.author.id
         enemy_id = enemy_member.id 
         channel_id = ctx.channel.id
@@ -60,7 +65,7 @@ class ChallengeCommand(commands.Cog):
             return
     
 
-        #Send a challenge to oponent
+        # Send a challenge to oponent
         view = challengeView(ctx.guild.id , ctx.channel.id, ctx.author)
 
         await enemy_member.send(content=f"{ctx.author.name.capitalize()} send you a 4-connect challenge [{mode}]", view=view)
@@ -68,18 +73,17 @@ class ChallengeCommand(commands.Cog):
         await view.wait()
 
 
-        #Check if challenge accepted
+        # Check if challenge accepted
         if not (view.accepted):
             await ctx.reply("Your challenge proposal was swiftly declined", ephemeral=True, delete_after=5)
             return
 
         await ctx.reply("Your enemy has accepted your proposition", ephemeral=True, delete_after=5)
 
-        #creating a game and getting it even tho it is still not recognised in the system
+        # Creating a game and getting it even tho it is still not recognised in the system
         await game_setup.create()
         game = Game(channel_id)
         
-        #Sending basic startic position
+        # Sending basic startic position
         msg = await ctx.send(game.get_position())
         game.update_last_pos_msg(msg.id)
-        

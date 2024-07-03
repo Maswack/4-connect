@@ -1,8 +1,8 @@
 import discord
 from discord.ext import commands
 
-from bot.useful_data.photo_links import PhotoLinks
-from bot.useful_data.embed_lines import EmbedLines
+from data.photo_links import PhotoLinks
+from data.embed_lines import EmbedLines
 
 from dotenv import load_dotenv
 import os

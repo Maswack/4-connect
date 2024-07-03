@@ -1,6 +1,8 @@
 from discord.ext import commands
 from user_settings.data_managment import PlayerData
 
+from events.in_bot.on_register import on_register_event
+
 
 class RegisterCommand(commands.Cog):
     def __init__(self, bot):
@@ -12,6 +14,9 @@ class RegisterCommand(commands.Cog):
         description="register an account to play"
     )
     async def register(self, ctx):
+        # Make event on register command execution (not related to registration procces):
+        await on_register_event(ctx.author)
+
         user_id = ctx.author.id
         user = PlayerData(user_id, operation="create")
 
