@@ -8,17 +8,26 @@
 **Create your account**
 > Required for playing the game
 
+### /help:
+**A help page of a bot**
+> Also contains link to the source code
+
 ### /info [Member]:
 **Get info about specific player**
 > Shows a nice menu with stuff like: winrate, skins, etc.
+
+### /leaderboard [Top]:
+**Gets rankings of players on the server**
+> Top sets amount of players to show (max=50)
 
 ### /set_skins:
 **Allows you to set special skin** for your's and opponent's coin, pretty neat.
 > Operated by dropdown menu
 
-### /challenge [Member]:
+### /challenge [Member, Mode:(casual, competetive)]:
 **Challenges a chosen member of the server**
 > Sends a dm to them with a possibility of accepting or declining it
+> Playing casual does not change elo
 
 ### /play [Move]:
 **Plays a move** 
@@ -32,8 +41,6 @@
 
 ## 📜 ToDo
 > **Disclaimer:** not everything will be added, but also some new stuff may come up
-  - Ranking (on your server)
-  - Add help page
   - Try to add a possibility of recieving duels in the text-channels (on servers) instead of dms [The player would be able to choose]
   - Improve UI (make it nicer, like it's good but still there is room for some improvement)
   - Get current players on the channel where command is executed
@@ -51,7 +58,6 @@
   - Add a time system that 
     - is a clock or:
     - naturally deletes game after some time around (45 min, 1h 15min)
-  - Add casual (will not change elo and w/l stats)
 
 </br>
 </br>
@@ -59,9 +65,8 @@
 
 ## ⚒️ Curent-Version:
 
-### 0.9.0 (24.06.2024):
-  - Added info page for checking your and other players stats
-  - Now the win panel shows the end position
-  - Organized command files, so that they are readeable
-  - Added elo system, and w/l stats (including amount of games and win-rate)
-  - Added command of surrendering
+### 0.9.1 (17.07.2024):
+  - Added bot help page
+  - Added role adder that stands as an badge of 4-connect players on server
+  - Added casual, competetive mode
+  - Added leaderboard command (shows ranking on a server)
