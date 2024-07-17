@@ -5,6 +5,9 @@ from typing import List
 from commands.functions.create_gamer_role import guild_role_exists
 from commands.functions.create_gamer_role import fetch_guild_role_id
 
+from user_settings.data_managment import PlayerData
+
+
 
 def print_guild_role_not_exists_error(guild_name, guild_id):
     print("error: ", "guild role does not exist")
@@ -25,9 +28,15 @@ def get_guild_role(member:discord.Member):
 
 async def add_gamer_role(member:discord.Member):
     guild_id = member.guild.id
+    user = PlayerData(member.id, "info")
 
     if not guild_role_exists(guild_id=guild_id):
         print_guild_role_not_exists_error(guild_name=member.guild.name, guild_id=guild_id)
+        return
+
+    if not user.exists():
+        print(f"{member.name} does not exists")
+        print("add_gamer_role.py")
         return
 
     
@@ -35,8 +44,8 @@ async def add_gamer_role(member:discord.Member):
 
 
     if not has_gamer_role(role=role, member_roles=member.roles) and role != None:
-        try: 
-            await member.add_roles(role)
+        try:
+            await member.add_roles(role) # Adding the role
         except Exception as e:
             print("error(member.add_roles): ", e)
     

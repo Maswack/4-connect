@@ -12,6 +12,7 @@ from commands.surrender_command import SurrenderCommand
 from commands.register_command import RegisterCommand
 from commands.skin_command import SkinCommand
 from commands.info_command import InfoCommand
+from commands.leaderboard_command import LeaderboardCommand
 from commands.help_command import HelpCommand
 #----------------------------------------------------
 
@@ -56,6 +57,7 @@ async def cogs_setup():
     await bot.add_cog(RegisterCommand(bot))
     await bot.add_cog(SkinCommand(bot))
     await bot.add_cog(InfoCommand(bot))
+    await bot.add_cog(LeaderboardCommand(bot))
     await bot.add_cog(HelpCommand(bot))
     #-------------------------------------------
     # Cog-Adding for events

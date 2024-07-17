@@ -1,7 +1,7 @@
 import discord
 import os
 
-role_name = "4-connect-gamer"
+role_name = "gamer-4-connect"
 
 
 
@@ -20,7 +20,6 @@ def fetch_guild_role_id(guild_id:int):
     else:
         with open(f"_servers/{guild_id}", "r") as file:
             role_id = int(file.readline())
-
 
     return role_id
 

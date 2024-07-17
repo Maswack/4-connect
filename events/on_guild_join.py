@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 from commands.functions.create_gamer_role import create_gamer_role
+from commands.functions.add_gamer_role import add_gamer_role
 
 
 class OnGuildJoin(commands.Cog):
@@ -23,3 +24,13 @@ class OnGuildJoin(commands.Cog):
         print('Guild joined: ',guild.name)
         print('Guild id: ', guild.id)
         print("--------------------------------------")
+
+        # Here bot is trying to add role to members of a server
+        # That are in data
+        try:
+            async for member in guild.fetch_members():
+                await add_gamer_role(member)
+            
+        except Exception as e:
+            print("error: ", e)
+            print('was not able to add gamer_role to all members of a joined server')
